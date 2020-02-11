@@ -31,8 +31,8 @@ class DataGrabber:
         cases_table_rows = cases_table.select("tr")
 
         for i in range(1, len(cases_table_rows)):
-            currentDeaths = int(cases_table_rows[i].find_next("td").find_next("td").string.replace(",", ""))
-            cases.append(currentDeaths)
+            current_cases = int(cases_table_rows[i].find_next("td").find_next("td").string.replace(",", ""))
+            cases.append(current_cases)
 
         return list(reversed(cases))
     
@@ -48,8 +48,8 @@ class DataGrabber:
         deaths_table_rows = deaths_table.select("tr")
 
         for i in range(1, len(deaths_table_rows)):
-            currentDeaths = int(deaths_table_rows[i].find_next("td").find_next("td").string.replace(",", ""))
-            deaths.append(currentDeaths)
+            current_deaths = int(deaths_table_rows[i].find_next("td").find_next("td").string.replace(",", ""))
+            deaths.append(current_deaths)
 
         return list(reversed(deaths))
 

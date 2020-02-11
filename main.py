@@ -21,7 +21,7 @@ def get_training_set():
         grabber.grab_data()
         data_file_name = grabber.get_default_file_name()
     
-    return np.genfromtxt(data_file_name, delimiter=',').astype(np.int32)
+    return np.genfromtxt("datasets/" + data_file_name, delimiter=',').astype(np.int32)
 
 def train_model(x, y, polynomial_degree=6):
     polynomial_features = PolynomialFeatures(degree=polynomial_degree)
@@ -51,6 +51,9 @@ def plot_graph(model_name, x, y, y_pred):
     sorted_zip = sorted(zip(x, y_pred), key=sort_axis)
     x, y_pred = zip(*sorted_zip)
     plt.plot(x, y_pred, color='m')
+    plt.title(model_name + " per day")
+    plt.xlabel("Day")
+    plt.ylabel(model_name)
     plt.show()
 
 if __name__ == "__main__":
@@ -72,8 +75,8 @@ if __name__ == "__main__":
     print("The amount of sick in the next day will be: " + str(next_day_cases_pred))
     print("The amount of deaths in the next day will be: " + str(next_day_deaths_pred))
     print("")
+
     print_stats("Cases", y_cases, y_cases_pred)
     print_stats("Deaths", y_deaths, y_deaths_pred)
-
     plot_graph("Cases", x, y_cases, y_cases_pred)
     plot_graph("Deaths", x, y_deaths, y_deaths_pred)
