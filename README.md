@@ -15,7 +15,6 @@ This project aims to predict the numbers that CCP are publishing in each day reg
 
 # How does it work?
 The main.py file uses the DataGrabber class (source included) to fetch the required data from https://www.worldometers.info.  
-The main.py file then trains 2 models using the fetched data and scikit-learn's LinearRegression - the cases per day model  
-and then the deaths per day model.  
-Afterwards, the file displays the models' predictions for the next day, as well as statistics about the model (the RMSE and R2 values) and displays a graph for each model that shows how well it scores
-(*spoiler alert*: it scores pretty well).
+The main.py file then trains 2 models using the fetched data and scikit-learn's LinearRegression - the cases in each day model  
+and then the deaths in each day model.  
+Afterwards, the file displays the models' predictions for the next day, as well as statistics about the models (the RMSE and R2 values), displays a graph for each model that shows how well they score and the functions that depict the trained model.
