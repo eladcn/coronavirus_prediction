@@ -9,19 +9,21 @@ from sklearn.metrics import mean_squared_error, r2_score
 from data_grabber import DataGrabber
 
 CASES_POLYNOMIAL_DEGREE = 5
-DEATHS_POLYNOMIAL_DEGREE = 4
-GRAB_DATA_FILE_FROM_SERVER = True
-DEFAULT_DATA_FILE_NAME = "dataset_2020-02-11.csv" # This will be used as the data file if GRAB_DATA_FILE_FROM_SERVER is set to False.
+DEATHS_POLYNOMIAL_DEGREE = 5
+GRAB_DATA_FILE_FROM_SERVER = True # Set this to False if you already have the data and you don't wish to redownload it.
 
-def get_training_set():
+def get_training_set_from_file(dataset_type):
+    filename = DataGrabber().get_dataset_file_name(dataset_type=dataset_type)
+
+    return np.genfromtxt("datasets/" + filename, delimiter=',').astype(np.int32)
+
+def get_training_sets():
     grabber = DataGrabber()
-    data_file_name = DEFAULT_DATA_FILE_NAME
 
     if GRAB_DATA_FILE_FROM_SERVER:
         grabber.grab_data()
-        data_file_name = grabber.get_default_file_name()
     
-    return np.genfromtxt("datasets/" + data_file_name, delimiter=',').astype(np.int32)
+    return (get_training_set_from_file("cases"), get_training_set_from_file("deaths"))
 
 def train_model(x, y, polynomial_degree):
     polynomial_features = PolynomialFeatures(degree=polynomial_degree)
@@ -82,13 +84,14 @@ def plot_graph(model_name, x, y, y_pred):
     plt.show()
 
 if __name__ == "__main__":
-    training_set = get_training_set()
-    x = training_set[:, 0].reshape(-1, 1)
-    y_cases = training_set[:, 1]
-    y_deaths = training_set[:, 2]
+    (training_set_cases, training_set_deaths) = get_training_sets()
+    x_cases = training_set_cases[:, 0].reshape(-1, 1)
+    x_deaths = training_set_deaths[:, 0].reshape(-1, 1)
+    y_cases = training_set_cases[:, 1]
+    y_deaths = training_set_deaths[:, 1]
 
-    cases_model = train_model(x, y_cases, CASES_POLYNOMIAL_DEGREE)
-    deaths_model = train_model(x, y_deaths, DEATHS_POLYNOMIAL_DEGREE)
+    cases_model = train_model(x_cases, y_cases, CASES_POLYNOMIAL_DEGREE)
+    deaths_model = train_model(x_deaths, y_deaths, DEATHS_POLYNOMIAL_DEGREE)
 
-    print_stats("Cases", cases_model, x, y_cases, CASES_POLYNOMIAL_DEGREE)
-    print_stats("Deaths", deaths_model, x, y_deaths, DEATHS_POLYNOMIAL_DEGREE)
+    print_stats("Cases", cases_model, x_cases, y_cases, CASES_POLYNOMIAL_DEGREE)
+    print_stats("Deaths", deaths_model, x_deaths, y_deaths, DEATHS_POLYNOMIAL_DEGREE)
