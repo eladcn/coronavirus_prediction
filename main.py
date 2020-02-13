@@ -1,4 +1,5 @@
 import operator
+import json
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -8,19 +9,15 @@ from sklearn.metrics import mean_squared_error, r2_score
 
 from data_grabber import DataGrabber
 
-CASES_POLYNOMIAL_DEGREE = 5
-DEATHS_POLYNOMIAL_DEGREE = 5
-GRAB_DATA_FILE_FROM_SERVER = True # Set this to False if you already have the data and you don't wish to redownload it.
-
 def get_training_set_from_file(dataset_type):
     filename = DataGrabber().get_dataset_file_name(dataset_type=dataset_type)
 
     return np.genfromtxt("datasets/" + filename, delimiter=',').astype(np.int32)
 
-def get_training_sets():
+def get_training_sets(grab_data_from_server=True):
     grabber = DataGrabber()
 
-    if GRAB_DATA_FILE_FROM_SERVER:
+    if grab_data_from_server:
         grabber.grab_data()
     
     return (get_training_set_from_file("cases"), get_training_set_from_file("deaths"))
@@ -84,14 +81,19 @@ def plot_graph(model_name, x, y, y_pred):
     plt.show()
 
 if __name__ == "__main__":
-    (training_set_cases, training_set_deaths) = get_training_sets()
+    config = {}
+
+    with open("config.json", "r") as f:
+        config = json.load(f)
+
+    (training_set_cases, training_set_deaths) = get_training_sets(config["grab_data_from_server"])
     x_cases = training_set_cases[:, 0].reshape(-1, 1)
     x_deaths = training_set_deaths[:, 0].reshape(-1, 1)
     y_cases = training_set_cases[:, 1]
     y_deaths = training_set_deaths[:, 1]
 
-    cases_model = train_model(x_cases, y_cases, CASES_POLYNOMIAL_DEGREE)
-    deaths_model = train_model(x_deaths, y_deaths, DEATHS_POLYNOMIAL_DEGREE)
+    cases_model = train_model(x_cases, y_cases, config["cases_polynomial_degree"])
+    deaths_model = train_model(x_deaths, y_deaths, config["deaths_polynomial_degree"])
 
-    print_stats("Cases", cases_model, x_cases, y_cases, CASES_POLYNOMIAL_DEGREE)
-    print_stats("Deaths", deaths_model, x_deaths, y_deaths, DEATHS_POLYNOMIAL_DEGREE)
+    print_stats("Cases", cases_model, x_cases, y_cases, config["cases_polynomial_degree"])
+    print_stats("Deaths", deaths_model, x_deaths, y_deaths, config["deaths_polynomial_degree"])
