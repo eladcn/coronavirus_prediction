@@ -1,5 +1,5 @@
-# CCP Coronavirus Prediction
-This project aims to predict the numbers that CCP are publishing in each day regarding the amount of Coronavirus cases and deaths.
+# Coronavirus (2019-nCoV) Prediction
+This project aims to predict the numbers that are published in each day regarding the amount of Coronavirus (2019-nCoV) cases and deaths.
 
 ## Requirements
 1. A machine with Python 3 installed.
