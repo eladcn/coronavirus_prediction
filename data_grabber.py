@@ -58,5 +58,14 @@ class DataGrabber:
             csv_writer = csv.writer(f, delimiter=',')
             csv_writer.writerows(data_to_save)
 
-    def get_dataset_file_name(self, dataset_type):
-        return dataset_type + "_dataset_" + datetime.today().strftime('%Y-%m-%d') + ".csv"
+    def get_dataset_file_name(self, dataset_type, dataset_date=""):
+        filename = dataset_type + "_dataset_"
+
+        if dataset_date == "":
+            filename += datetime.today().strftime('%Y-%m-%d')
+        else:
+            filename += dataset_date
+        
+        filename += ".csv"
+        
+        return filename

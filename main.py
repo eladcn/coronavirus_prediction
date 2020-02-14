@@ -9,18 +9,24 @@ from sklearn.metrics import mean_squared_error, r2_score
 
 from data_grabber import DataGrabber
 
-def get_training_set_from_file(dataset_type):
-    filename = DataGrabber().get_dataset_file_name(dataset_type=dataset_type)
+def get_training_set_from_file(dataset_type, offline_dataset_date=""):
+    filename = DataGrabber().get_dataset_file_name(dataset_type=dataset_type, dataset_date=offline_dataset_date)
 
     return np.genfromtxt("datasets/" + filename, delimiter=',').astype(np.int32)
 
-def get_training_sets(grab_data_from_server=True):
+def get_training_sets(grab_data_from_server=True, offline_dataset_date=""):
     grabber = DataGrabber()
+    dataset_date = ""
 
     if grab_data_from_server:
         grabber.grab_data()
+    else:
+        dataset_date = offline_dataset_date
+
+        if offline_dataset_date == "":
+            raise Exception("Invalid offline dataset date received. Please update the 'offline_dataset_date' configuration in the config file and try again.")
     
-    return (get_training_set_from_file("cases"), get_training_set_from_file("deaths"))
+    return (get_training_set_from_file("cases", offline_dataset_date=dataset_date), get_training_set_from_file("deaths", offline_dataset_date=dataset_date))
 
 def train_model(x, y, polynomial_degree):
     polynomial_features = PolynomialFeatures(degree=polynomial_degree)
@@ -86,7 +92,7 @@ if __name__ == "__main__":
     with open("config.json", "r") as f:
         config = json.load(f)
 
-    (training_set_cases, training_set_deaths) = get_training_sets(config["grab_data_from_server"])
+    (training_set_cases, training_set_deaths) = get_training_sets(config["grab_data_from_server"], config["offline_dataset_date"])
     x_cases = training_set_cases[:, 0].reshape(-1, 1)
     x_deaths = training_set_deaths[:, 0].reshape(-1, 1)
     y_cases = training_set_cases[:, 1]

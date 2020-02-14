@@ -1,5 +1,6 @@
 {
-    "grab_data_from_server": 1,
-    "cases_polynomial_degree": 6,
-    "deaths_polynomial_degree": 5
+    "grab_data_from_server": true,
+    "cases_polynomial_degree": 4,
+    "deaths_polynomial_degree": 4,
+    "offline_dataset_date": "2020-02-14"
 }
