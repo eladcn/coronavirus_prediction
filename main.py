@@ -80,6 +80,7 @@ def plot_graph(model_name, x, y, y_pred):
     sort_axis = operator.itemgetter(0)
     sorted_zip = sorted(zip(x, y_pred), key=sort_axis)
     x, y_pred = zip(*sorted_zip)
+    
     plt.plot(x, y_pred, color='m')
     plt.title("Amount of " + model_name + " in each day")
     plt.xlabel("Day")

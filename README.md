@@ -24,7 +24,7 @@ Afterwards, the file displays the models' predictions for the next day, as well 
 ![Terminal output](/outputs/terminal.png)
 
 ### Cases in each day graph
-![Cases in each day graph](/outputs/cases_in_each_day.png)
+![Cases in each day graph](/outputs/cases_in_each_day.svg)
 
 ### Deaths in each day graph
-![Deaths in each day graph](/outputs/deaths_in_each_day.png)
+![Deaths in each day graph](/outputs/deaths_in_each_day.svg)
