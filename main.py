@@ -43,22 +43,13 @@ def get_predictions(x, model, polynomial_degree):
 
     return model.predict(x_poly)
 
-def print_stats(model_name, model, x, y, polynomial_degree):
+def print_stats(model_name, model, x, y, polynomial_degree, days_to_predict):
     y_pred = np.round(get_predictions(x, model, polynomial_degree), 0).astype(np.int32)
-    next_day_x = np.array([len(x)]).reshape(-1, 1)
-    next_day_pred = np.round(get_predictions(next_day_x, model, polynomial_degree), 0)
 
+    print_forecast(model_name, model, polynomial_degree, beginning_day=len(x), limit=days_to_predict)
     print_model_polynomial(model_name, model)
-    print("The predicted amount of " + model_name + " in the next day is: " + str(int(next_day_pred)))
-
-    rmse = np.sqrt(mean_squared_error(y, y_pred))
-    r2 = r2_score(y, y_pred)
-
-    print(model_name + " RMSE: " + str(rmse))
-    print(model_name + " R2: " + str(r2))
-    print("")
-
     plot_graph(model_name, x, y, y_pred)
+    print("")
 
 def print_model_polynomial(model_name, model):
     coef = model.coef_
@@ -73,7 +64,7 @@ def print_model_polynomial(model_name, model):
         
         poly += "{0:.3f}".format(coef[i]).replace("-", "") + "X^" + str(i)
 
-    print("The " + model_name + " function is: f(X) = " + poly)
+    print("The " + model_name + " model function is: f(X) = " + poly)
 
 def plot_graph(model_name, x, y, y_pred):
     plt.scatter(x, y, s=10)
@@ -86,6 +77,15 @@ def plot_graph(model_name, x, y, y_pred):
     plt.xlabel("Day")
     plt.ylabel(model_name)
     plt.show()
+
+def print_forecast(model_name, model, polynomial_degree, beginning_day=0, limit=10):
+    next_days_x = np.array(range(beginning_day, beginning_day + limit)).reshape(-1, 1)
+    next_days_pred = np.round(get_predictions(next_days_x, model, polynomial_degree), 0).astype(np.int32)
+
+    print("The forecast for " + model_name + " in the next " + str(limit) + " days is:")
+
+    for i in range(0, limit):
+        print(str(i + 1) + ": " + str(next_days_pred[i]))
 
 if __name__ == "__main__":
     config = {}
@@ -102,5 +102,5 @@ if __name__ == "__main__":
     cases_model = train_model(x_cases, y_cases, config["cases_polynomial_degree"])
     deaths_model = train_model(x_deaths, y_deaths, config["deaths_polynomial_degree"])
 
-    print_stats("Cases", cases_model, x_cases, y_cases, config["cases_polynomial_degree"])
-    print_stats("Deaths", deaths_model, x_deaths, y_deaths, config["deaths_polynomial_degree"])
+    print_stats("Cases", cases_model, x_cases, y_cases, config["cases_polynomial_degree"], config["days_to_predict"])
+    print_stats("Deaths", deaths_model, x_deaths, y_deaths, config["deaths_polynomial_degree"], config["days_to_predict"])
