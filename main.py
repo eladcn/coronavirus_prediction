@@ -82,7 +82,7 @@ def print_forecast(model_name, model, polynomial_degree, beginning_day=0, limit=
     next_days_x = np.array(range(beginning_day, beginning_day + limit)).reshape(-1, 1)
     next_days_pred = np.round(get_predictions(next_days_x, model, polynomial_degree), 0).astype(np.int32)
 
-    print("The forecast for " + model_name + " in the next " + str(limit) + " days is:")
+    print("The forecast for " + model_name + " in the following " + str(limit) + " days is:")
 
     for i in range(0, limit):
         print(str(i + 1) + ": " + str(next_days_pred[i]))
