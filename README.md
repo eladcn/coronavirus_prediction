@@ -30,8 +30,10 @@ Afterwards, the file displays the models' predictions for the next day, as well 
 ![Deaths in each day graph](/outputs/deaths_in_each_day.svg)
 
 ## Predictions
-| Date       | Cases  | Deaths | Predicted Cases | Predicted Deaths | Notes                             |
-| ---------- | ------ | ------ | --------------- | ---------------- | ------------------------------    |
-| 15.02.2020 | ?      | ?      | 76,951          | 1,681            |                                   |
-| 14.02.2020 | 67,100 | 1,526  | 72,319          | 1,528            | The data was changed in this day. |
-| 13.02.2020 | 64,437 | 1,383  | 63,014          | 1,520            |                                   |
+| Date       | Cases  | Deaths | Predicted Cases | Predicted Deaths |
+| ---------- | ------ | ------ | --------------- | ---------------- |
+| 16.02.2020 | ?      | ?      | 76,943          | 1,824            |
+| 15.02.2020 | 69,197 | 1,669  | 73,331          | 1,668            |
+| 14.02.2020 | 67,100 | 1,526  | 67,496          | 1,516            |
+| 13.02.2020 | 64,437 | 1,383  | 58,692          | 1,376            |
+| 12.02.2020 | 45,170 | 1,115  | 48,123          | 1,233            |
