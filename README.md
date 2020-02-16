@@ -32,7 +32,7 @@ Afterwards, the file displays the models' predictions for the next day, as well 
 ## Predictions
 | Date       | Cases  | Deaths | Predicted Cases | Predicted Deaths |
 | ---------- | ------ | ------ | --------------- | ---------------- |
-| 16.02.2020 | ?      | ?      | 76,943          | 1,824            |
+| 16.02.2020 | TBA    | TBA    | 76,943          | 1,824            |
 | 15.02.2020 | 69,197 | 1,669  | 73,331          | 1,668            |
 | 14.02.2020 | 67,100 | 1,526  | 67,496          | 1,516            |
 | 13.02.2020 | 64,437 | 1,383  | 58,692          | 1,376            |
