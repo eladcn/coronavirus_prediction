@@ -2,6 +2,6 @@
     "grab_data_from_server": true,
     "cases_polynomial_degree": 3,
     "deaths_polynomial_degree": 3,
-    "offline_dataset_date": "2020-02-16",
+    "offline_dataset_date": "2020-02-17",
     "days_to_predict": 10
 }
