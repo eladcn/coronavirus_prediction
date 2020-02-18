@@ -7,15 +7,11 @@ from sklearn.linear_model import LinearRegression
 from sklearn.preprocessing import PolynomialFeatures
 from sklearn.metrics import mean_squared_error, r2_score
 
-from data_grabber import DataGrabber
+from data_grabbers.cases_data_grabber import CasesDataGrabber
+from data_grabbers.deaths_data_grabber import DeathsDataGrabber
 
-def get_training_set_from_file(dataset_type, offline_dataset_date=""):
-    filename = DataGrabber().get_dataset_file_name(dataset_type=dataset_type, dataset_date=offline_dataset_date)
-
-    return np.genfromtxt("datasets/" + filename, delimiter=',').astype(np.int32)
-
-def get_training_sets(grab_data_from_server=True, offline_dataset_date=""):
-    grabber = DataGrabber()
+def grab_training_set(datagrabber_class, grab_data_from_server=True, offline_dataset_date=""):
+    grabber = globals()[datagrabber_class]()
     dataset_date = ""
 
     if grab_data_from_server:
@@ -26,7 +22,9 @@ def get_training_sets(grab_data_from_server=True, offline_dataset_date=""):
         if offline_dataset_date == "":
             raise Exception("Invalid offline dataset date received. Please update the 'offline_dataset_date' configuration in the config file and try again.")
     
-    return (get_training_set_from_file("cases", offline_dataset_date=dataset_date), get_training_set_from_file("deaths", offline_dataset_date=dataset_date))
+    filename = grabber.get_dataset_file_name(dataset_date=dataset_date)
+
+    return np.genfromtxt("datasets/" + filename, delimiter=',').astype(np.int32)
 
 def train_model(x, y, polynomial_degree):
     polynomial_features = PolynomialFeatures(degree=polynomial_degree)
@@ -87,20 +85,19 @@ def print_forecast(model_name, model, polynomial_degree, beginning_day=0, limit=
     for i in range(0, limit):
         print(str(i + 1) + ": " + str(next_days_pred[i]))
 
+def model_handler(model_config):
+    training_set = grab_training_set(model_config["datagrabber_class"], model_config["grab_data_from_server"], model_config["offline_dataset_date"])
+    x = training_set[:, 0].reshape(-1, 1)
+    y = training_set[:, 1]
+    model = train_model(x, y, model_config["polynomial_degree"])
+
+    print_stats(model_config["model_name"], model, x, y, model_config["polynomial_degree"], model_config["days_to_predict"])
+
 if __name__ == "__main__":
     config = {}
 
     with open("config.json", "r") as f:
         config = json.load(f)
 
-    (training_set_cases, training_set_deaths) = get_training_sets(config["grab_data_from_server"], config["offline_dataset_date"])
-    x_cases = training_set_cases[:, 0].reshape(-1, 1)
-    x_deaths = training_set_deaths[:, 0].reshape(-1, 1)
-    y_cases = training_set_cases[:, 1]
-    y_deaths = training_set_deaths[:, 1]
-
-    cases_model = train_model(x_cases, y_cases, config["cases_polynomial_degree"])
-    deaths_model = train_model(x_deaths, y_deaths, config["deaths_polynomial_degree"])
-
-    print_stats("Cases", cases_model, x_cases, y_cases, config["cases_polynomial_degree"], config["days_to_predict"])
-    print_stats("Deaths", deaths_model, x_deaths, y_deaths, config["deaths_polynomial_degree"], config["days_to_predict"])
+    for model_config in config["models"]:
+        model_handler(model_config)

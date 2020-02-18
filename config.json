@@ -1,7 +1,20 @@
 {
-    "grab_data_from_server": true,
-    "cases_polynomial_degree": 4,
-    "deaths_polynomial_degree": 4,
-    "offline_dataset_date": "2020-02-18",
-    "days_to_predict": 10
+    "models": [
+        {
+            "model_name": "Cases",
+            "polynomial_degree": 4,
+            "datagrabber_class": "CasesDataGrabber",
+            "grab_data_from_server": true,
+            "offline_dataset_date": "2020-02-18",
+            "days_to_predict": 10
+        },
+        {
+            "model_name": "Deaths",
+            "polynomial_degree": 4,
+            "datagrabber_class": "DeathsDataGrabber",
+            "grab_data_from_server": true,
+            "offline_dataset_date": "2020-02-18",
+            "days_to_predict": 10
+        }
+    ]
 }

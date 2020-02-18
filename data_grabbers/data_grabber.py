@@ -10,16 +10,7 @@ https://www.worldometers.info
 class DataGrabber:
     TARGET_DOMAIN = "https://www.worldometers.info/coronavirus"
 
-    def grab_data(self):
-        cases = self.get_cases()
-        deaths = self.get_deaths()
-        cases_filename = self.get_dataset_file_name("cases")
-        deaths_filename = self.get_dataset_file_name("deaths")
-
-        self.__save_data_to_file(cases_filename, cases)
-        self.__save_data_to_file(deaths_filename, deaths)
-
-    def __get_table_content(self, path, table_selector, table_index):
+    def get_table_content(self, path, table_selector, table_index):
         url = DataGrabber.TARGET_DOMAIN + "/" + path
         req = requests.get(url)
         content = req.content
@@ -37,17 +28,7 @@ class DataGrabber:
 
         return data
 
-    def get_cases(self):
-        data = self.__get_table_content("coronavirus-cases", ".table-responsive", 2)
-
-        return list(reversed(data))
-    
-    def get_deaths(self):
-        data = self.__get_table_content("coronavirus-death-toll", ".table-responsive", 0)
-
-        return list(reversed(data))
-
-    def __save_data_to_file(self, filename, data):
+    def save_data_to_file(self, filename, data):
         data_to_save = []
 
         # There are more 
@@ -58,8 +39,8 @@ class DataGrabber:
             csv_writer = csv.writer(f, delimiter=',')
             csv_writer.writerows(data_to_save)
 
-    def get_dataset_file_name(self, dataset_type, dataset_date=""):
-        filename = dataset_type + "_dataset_"
+    def get_dataset_file_name(self, dataset_prefix, dataset_date=""):
+        filename = dataset_prefix + "_dataset_"
 
         if dataset_date == "":
             filename += datetime.today().strftime('%Y-%m-%d')
