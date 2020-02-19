@@ -5,7 +5,6 @@ import matplotlib.pyplot as plt
 
 from sklearn.linear_model import LinearRegression
 from sklearn.preprocessing import PolynomialFeatures
-from sklearn.metrics import mean_squared_error, r2_score
 
 from data_grabbers.cases_data_grabber import CasesDataGrabber
 from data_grabbers.deaths_data_grabber import DeathsDataGrabber

@@ -32,7 +32,8 @@ Afterwards, the file displays the models' predictions for the next day, the func
 ## Predictions
 | Date       | Cases  | Deaths | Predicted Cases | Predicted Deaths | Notes                            |
 | ---------- | ------ | ------ | --------------- | ---------------- | -------------------------------- |
-| 18.02.2020 | TBA    | TBA    | 77,842          | 2,030            | Changed the polynomials degrees. |
+| 19.02.2020 | TBA    | TBA    | 77,427          | 2,138            |                                  |
+| 18.02.2020 | 75,198 | 2,009  | 77,842          | 2,030            | Changed the polynomials degrees. |
 | 17.02.2020 | 73,336 | 1,874  | 79,231          | 1,956            |                                  |
 | 16.02.2020 | 71,329 | 1,775  | 76,943          | 1,824            |                                  |
 | 15.02.2020 | 69,197 | 1,669  | 73,331          | 1,668            |                                  |
