@@ -32,8 +32,9 @@ Afterwards, the file displays the models' predictions for the next day, the func
 ## Predictions
 | Date       | Cases  | Deaths | Predicted Cases | Predicted Deaths | Notes                                                    |
 | ---------- | ------ | ------ | --------------- | ---------------- | -------------------------------------------------------- |
-| 25.05.2020 | TBA    | TBA    | -               | 2,775            |                                                          |
-| 24.02.2020 | 80,088 | 2,699  | -               | 2,679            | The cases model needs to be changed.                     |
+| 26.02.2020 | TBA    | TBA    | -               | 2,839            |                                                          |
+| 25.02.2020 | 80,828 | 2,763  | -               | 2,775            |                                                          |
+| 24.02.2020 | 80,087 | 2,699  | -               | 2,679            | The cases model needs to be changed.                     |
 | 23.02.2020 | 79,205 | 2,618  | 79,611          | 2,548            |                                                          |
 | 22.02.2020 | 78,651 | 2,460  | 80,423          | 2,458            | Changed the cases model polynomial degree.               |
 | 21.02.2020 | 77,673 | 2,360  | 75,162          | 2,355            | We need more cases data in order to have correct values. |
