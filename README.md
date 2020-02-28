@@ -32,7 +32,7 @@ Afterwards, the file displays the models' predictions for the next day, the func
 ## Predictions
 | Date       | Cases  | Deaths | Predicted Cases | Predicted Deaths | Notes                                                    |
 | ---------- | ------ | ------ | --------------- | ---------------- | -------------------------------------------------------- |
-| 27.02.2020 | TBA    | TBA    | -               | 2,867            |                                                          |
+| 27.02.2020 | 83,113 | 2,858  | -               | 2,867            |                                                          |
 | 26.02.2020 | 81,828 | 2,801  | -               | 2,839            |                                                          |
 | 25.02.2020 | 80,828 | 2,763  | -               | 2,775            |                                                          |
 | 24.02.2020 | 80,087 | 2,699  | -               | 2,679            | The cases model needs to be changed.                     |
