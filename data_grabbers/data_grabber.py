@@ -31,7 +31,6 @@ class DataGrabber:
     def save_data_to_file(self, filename, data):
         data_to_save = []
 
-        # There are more 
         for i in range(0, len(data)):
             data_to_save.append([i, data[i]])
         
