@@ -15,9 +15,11 @@ This project aims to predict the numbers that are published in each day regardin
 
 ## How does it work?
 The main.py file uses the DataGrabber class (source included) to fetch the required data from https://www.worldometers.info.  
-The main.py file then trains 2 models using the fetched data and scikit-learn's LinearRegression - the cases in each day model  
-and then the deaths in each day model.  
+The main.py file then trains 2 polynomial models using the fetched data and scikit-learn's LinearRegression - the cases in each day model and then the deaths in each day model.  
 Afterwards, the file displays the models' predictions for the next day, the functions that depict the trained models and displays a graph for each model.
+
+## Contact info
+You may contact me via Linkedin: https://www.linkedin.com/in/eladcn/.
 
 ## Output examples
 ### Terminal output
