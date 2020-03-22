@@ -10,8 +10,15 @@ This project aims to predict the numbers that are published in each day regardin
     - BeautifulSoup
 
 ## How to use
-1. Install the required packages (as mentioned above).
-2. Run the main.py file using Python 3.
+
+(Using Poetry)
+1. Install [Poetry](https://python-poetry.org/)
+2. Run `poetry install`
+3. Run `poetry run python main.py`
+
+(Not using Poetry)
+1. Install dependencies with `pip install -r requirements.txt`
+2. Run `python main.py`
 
 ## How does it work?
 The main.py file uses the DataGrabber class (source included) to fetch the required data from https://www.worldometers.info.  
@@ -33,7 +40,7 @@ You may contact me via Linkedin: https://www.linkedin.com/in/eladcn/.
 
 ## Predictions
 | Date       | Cases   | Deaths | Predicted Cases | Predicted Deaths | Notes                                                    |
-| ---------- | ------  | ------ | --------------- | ---------------- | -------------------------------------------------------- |
+| ---------- | ------- | ------ | --------------- | ---------------- | -------------------------------------------------------- |
 | 22.03.2020 | TBA     | TBA    | 334,355         | 14,544           |                                                          |
 | 21.03.2020 | 305,036 | 13,013 | 298,845         | 12,760           |                                                          |
 | 20.03.2020 | 275,598 | 11,387 | 265,940         | 11,271           |                                                          |
