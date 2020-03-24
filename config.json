@@ -5,7 +5,7 @@
             "polynomial_degree": 5,
             "datagrabber_class": "CasesDataGrabber",
             "grab_data_from_server": true,
-            "offline_dataset_date": "2020-03-23",
+            "offline_dataset_date": "2020-03-24",
             "days_to_predict": 10
         },
         {
@@ -13,7 +13,7 @@
             "polynomial_degree": 5,
             "datagrabber_class": "DeathsDataGrabber",
             "grab_data_from_server": true,
-            "offline_dataset_date": "2020-03-23",
+            "offline_dataset_date": "2020-03-24",
             "days_to_predict": 10
         }
     ]
