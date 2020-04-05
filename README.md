@@ -51,7 +51,8 @@ You may contact me via Linkedin: https://www.linkedin.com/in/eladcn/.
 ## Predictions
 | Date       | Cases     | Deaths | Predicted Cases | Predicted Deaths | Notes                                                    |
 | ---------- | --------- | ------ | --------------- | ---------------- | -------------------------------------------------------- |
-| 04.04.2020 | TBA       | TBA    | 1,199,951       | 65,524           |                                                          |
+| 05.04.2020 | TBA       | TBA    | 1,309,632       | 72,120           | Changed the cases model's polynomial degree.             |
+| 04.04.2020 | 1,201,483 | 64,691 | 1,199,951       | 65,524           |                                                          |
 | 03.04.2020 | 1,116,662 | 59,162 | 1,101,907       | 58,909           | Restored the deaths model's polynomial degree.           |
 | 02.04.2020 | 1,015,065 | 53,167 | 1,023,706       | 52,199           | Changed the models' poloynomials degrees.                |
 | 01.04.2020 | 935,197   | 47,192 | 965,240         | 47,590           |                                                          |
