@@ -6,6 +6,7 @@ This project aims to predict the numbers that are published in each day regardin
 - [How to use](#how-to-use)
 - [How does it work](#how-does-it-work)
 - [Contact info](#contact-info)
+- [Adding models](#adding-models)
 - [Output examples](#output-examples)
     * [Terminal output](#terminal-output)
     * [Cases in each day graph](#cases-in-each-day-graph)
@@ -37,6 +38,41 @@ Afterwards, the file displays the models' predictions for the next day, the func
 
 ## Contact info
 You may contact me via Linkedin: https://www.linkedin.com/in/eladcn/.
+
+## Adding models
+It is possible to add more models (e.g. models for specific countries) to the project by taking the following steps:
+1. Create a new DataGrabber class (you can name it however you want, for example: USADeathsDataGrabber), it doesn't have to inherit from class DataGrabber.
+2. Implement the following method in the new class you created:
+    `def get_dataset_file_name(self, dataset_date)`
+    This method should return the dataset file name for a specific given date.
+    For example, it may return:
+    `"USA_" + dataset_date + ".csv".`
+    You can find a good example for this in the CasesDataGrabber class.
+3. (Optional) If you can fetch the data from an external source (instead of managing the dataset manually) and you would like to implement this feature, implement the following method in the new class you created:
+    `def grab_data(self)`
+    This method should fetch the data from a data source and store it into a file (which is the same format as mentioned in section 2).
+4. Add the following configuration to the models array inside the config.json file:
+```
+        {
+            "model_name": "USA Deaths", // This is only used for display reasons and will not affect any logic.
+            "polynomial_degree": 5, // A hyper parameter - The degree of the model's polynomial that we're trying to find.
+            "datagrabber_class": "USADeathsDataGrabber", // The class we would like to use.
+            "grab_data_from_server": true, // Set this to false if you would like to manage the dataset manually (i.e not use the grab_data(self) method).
+            "offline_dataset_date": "2020-04-10", // If the dataset is managed manually - specify the date of the offline dataset file.
+            "days_to_predict": 10 // How many days ahead you would like to predict.
+        }
+```
+
+Please note that the data should be formatted in a CSV file with the following structure:
+```
+0,value_for_day_0
+1,value_for_day_1
+2,value_for_day_2
+.
+.
+.
+n,value_for_day_n
+```
 
 ## Output examples
 ### Terminal output
