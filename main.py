@@ -3,11 +3,10 @@ import json
 import numpy as np
 import matplotlib.pyplot as plt
 
-from sklearn.linear_model import LinearRegression
-from sklearn.preprocessing import PolynomialFeatures
-
 from data_grabbers.cases_data_grabber import CasesDataGrabber
 from data_grabbers.deaths_data_grabber import DeathsDataGrabber
+from models.NeuralNetModel import NeuralNetModel
+from models.PolynomialRegressionModel import PolynomialRegressionModel
 
 def grab_training_set(datagrabber_class, grab_data_from_server=True, offline_dataset_date=""):
     grabber = globals()[datagrabber_class]()
@@ -25,43 +24,19 @@ def grab_training_set(datagrabber_class, grab_data_from_server=True, offline_dat
 
     return np.genfromtxt("datasets/" + filename, delimiter=',').astype(np.int32)
 
-def train_model(x, y, polynomial_degree):
-    polynomial_features = PolynomialFeatures(degree=polynomial_degree)
-    x_poly = polynomial_features.fit_transform(x)
+def get_model(x, y, model_config):
+    if model_config["model"]["type"] == "regression":
+        regression_model = PolynomialRegressionModel(model_config["model_name"], model_config["model"]["polynomial_degree"])
+        regression_model.train(x, y)
 
-    model = LinearRegression()
-    model.fit(x_poly, y)
-
-    return model
-
-def get_predictions(x, model, polynomial_degree):
-    polynomial_features = PolynomialFeatures(degree=polynomial_degree)
-    x_poly = polynomial_features.fit_transform(x)
-
-    return model.predict(x_poly)
-
-def print_stats(model_name, model, x, y, polynomial_degree, days_to_predict):
-    y_pred = np.round(get_predictions(x, model, polynomial_degree), 0).astype(np.int32)
-
-    print_forecast(model_name, model, polynomial_degree, beginning_day=len(x), limit=days_to_predict)
-    print_model_polynomial(model_name, model)
-    plot_graph(model_name, x, y, y_pred)
-    print("")
-
-def print_model_polynomial(model_name, model):
-    coef = model.coef_
-    intercept = model.intercept_
-    poly = "{0:.3f}".format(intercept)
-
-    for i in range(1, len(coef)):
-        if coef[i] >= 0:
-            poly += " + "
-        else:
-            poly += " - "
+        return regression_model
+    elif model_config["model"]["type"] == "neural_net":
+        neural_net_model = NeuralNetModel(model_config["model_name"])
+        neural_net_model.train(x, y, model_config["model"]["hidden_layer_sizes"], model_config["model"]["learning_rate"], model_config["model"]["max_iter"])
         
-        poly += "{0:.3f}".format(coef[i]).replace("-", "") + "X^" + str(i)
-
-    print("The " + model_name + " model function is: f(X) = " + poly)
+        return neural_net_model
+    
+    return None
 
 def plot_graph(model_name, x, y, y_pred):
     plt.scatter(x, y, s=10)
@@ -75,22 +50,33 @@ def plot_graph(model_name, x, y, y_pred):
     plt.ylabel(model_name)
     plt.show()
 
-def print_forecast(model_name, model, polynomial_degree, beginning_day=0, limit=10):
+def print_forecast(model_name, model, beginning_day=0, limit=10):
     next_days_x = np.array(range(beginning_day, beginning_day + limit)).reshape(-1, 1)
-    next_days_pred = np.round(get_predictions(next_days_x, model, polynomial_degree), 0).astype(np.int32)
+    next_days_pred = model.get_predictions(next_days_x)
 
     print("The forecast for " + model_name + " in the following " + str(limit) + " days is:")
 
     for i in range(0, limit):
-        print(str(i + 1) + ": " + str(next_days_pred[i]))
+        print("Day " + str(i + 1) + ": " + str(next_days_pred[i]))
+
+def print_stats(model_config, x, y, model):
+    y_pred = model.get_predictions(x)
+
+    print_forecast(model_config["model_name"], model, beginning_day=len(x), limit=model_config["days_to_predict"])
+
+    if isinstance(model, PolynomialRegressionModel):
+        print("The " + model_config["model_name"] + " model function is: f(X) = " + model.get_model_polynomial_str())
+
+    plot_graph(model_config["model_name"], x, y, y_pred)
+    print("")
 
 def model_handler(model_config):
     training_set = grab_training_set(model_config["datagrabber_class"], model_config["grab_data_from_server"], model_config["offline_dataset_date"])
     x = training_set[:, 0].reshape(-1, 1)
     y = training_set[:, 1]
-    model = train_model(x, y, model_config["polynomial_degree"])
+    model = get_model(x, y, model_config)
 
-    print_stats(model_config["model_name"], model, x, y, model_config["polynomial_degree"], model_config["days_to_predict"])
+    print_stats(model_config, x, y, model)
 
 if __name__ == "__main__":
     config = {}
@@ -99,4 +85,7 @@ if __name__ == "__main__":
         config = json.load(f)
 
     for model_config in config["models"]:
+        if "enabled" in model_config and model_config["enabled"] == False:
+            continue
+        
         model_handler(model_config)

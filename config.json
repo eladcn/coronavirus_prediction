@@ -1,17 +1,40 @@
 {
     "models": [
         {
+            "enabled": true,
             "model_name": "Cases",
-            "polynomial_degree": 6,
+            "model": {
+                "type": "regression",
+                "polynomial_degree": 6
+            },
             "datagrabber_class": "CasesDataGrabber",
             "grab_data_from_server": true,
             "offline_dataset_date": "2020-04-10",
             "days_to_predict": 10
         },
         {
+            "enabled": true,
             "model_name": "Deaths",
-            "polynomial_degree": 7,
+            "model": {
+                "type": "regression",
+                "polynomial_degree": 7
+            },
             "datagrabber_class": "DeathsDataGrabber",
+            "grab_data_from_server": true,
+            "offline_dataset_date": "2020-04-10",
+            "days_to_predict": 10
+        },
+        {
+            "_comment": "This is an example of how to use a neural network model which can be useful in some cases.",
+            "enabled": false,
+            "model_name": "Cases using Neural Network",
+            "model": {
+                "type": "neural_net",
+                "hidden_layer_sizes": [64, 64],
+                "learning_rate": 0.001,
+                "max_iter": 50000
+            },
+            "datagrabber_class": "CasesDataGrabber",
             "grab_data_from_server": true,
             "offline_dataset_date": "2020-04-10",
             "days_to_predict": 10
