@@ -54,8 +54,12 @@ It is possible to add more models (e.g. models for specific countries) to the pr
 4. Add the following configuration to the models array inside the config.json file:
 ```
         {
+            "enabled": true, // Whether the model is enabled and the program should handle it or not.
             "model_name": "USA Deaths", // This is only used for display reasons and will not affect any logic.
-            "polynomial_degree": 5, // A hyper parameter - The degree of the model's polynomial that we're trying to find.
+            "model": {
+                "type": "regression", // The model type, could be either "regression" or "neural_net".
+                "polynomial_degree": 6 // A hyper parameter for regression models. See the config file for a neural network example.
+            },
             "datagrabber_class": "USADeathsDataGrabber", // The class we would like to use.
             "grab_data_from_server": true, // Set this to false if you would like to manage the dataset manually (i.e not use the grab_data(self) method).
             "offline_dataset_date": "2020-04-10", // If the dataset is managed manually - specify the date of the offline dataset file.
