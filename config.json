@@ -9,7 +9,7 @@
             },
             "datagrabber_class": "CasesDataGrabber",
             "grab_data_from_server": true,
-            "offline_dataset_date": "2020-04-10",
+            "offline_dataset_date": "2020-04-12",
             "days_to_predict": 10
         },
         {
@@ -21,7 +21,7 @@
             },
             "datagrabber_class": "DeathsDataGrabber",
             "grab_data_from_server": true,
-            "offline_dataset_date": "2020-04-10",
+            "offline_dataset_date": "2020-04-12",
             "days_to_predict": 10
         },
         {
@@ -30,13 +30,13 @@
             "model_name": "Cases using Neural Network",
             "model": {
                 "type": "neural_net",
-                "hidden_layer_sizes": [64, 64],
+                "hidden_layer_sizes": [80, 80],
                 "learning_rate": 0.001,
                 "max_iter": 50000
             },
             "datagrabber_class": "CasesDataGrabber",
             "grab_data_from_server": true,
-            "offline_dataset_date": "2020-04-10",
+            "offline_dataset_date": "2020-04-12",
             "days_to_predict": 10
         }
     ]
