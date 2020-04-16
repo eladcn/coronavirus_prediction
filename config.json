@@ -9,7 +9,7 @@
             },
             "datagrabber_class": "CasesDataGrabber",
             "grab_data_from_server": true,
-            "offline_dataset_date": "2020-04-15",
+            "offline_dataset_date": "2020-04-16",
             "days_to_predict": 10
         },
         {
@@ -21,7 +21,7 @@
             },
             "datagrabber_class": "DeathsDataGrabber",
             "grab_data_from_server": true,
-            "offline_dataset_date": "2020-04-15",
+            "offline_dataset_date": "2020-04-16",
             "days_to_predict": 10
         },
         {
@@ -36,7 +36,7 @@
             },
             "datagrabber_class": "CasesDataGrabber",
             "grab_data_from_server": true,
-            "offline_dataset_date": "2020-04-15",
+            "offline_dataset_date": "2020-04-16",
             "days_to_predict": 10
         }
     ]
