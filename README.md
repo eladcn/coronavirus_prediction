@@ -91,7 +91,8 @@ n,value_for_day_n
 ## Predictions
 | Date       | Cases     | Deaths  | Predicted Cases | Predicted Deaths | Notes                                                    |
 | ---------- | --------- | ------- | --------------- | ---------------- | -------------------------------------------------------- |
-| 17.04.2020 | TBA       | TBA     | 2,247,654       | 148,412          | Both models are now using a neural network architecture. |
+| 18.04.2020 | TBA       | TBA     | 2,313,171       | 152,571          | The deaths model will be changed.                        |
+| 17.04.2020 | 2,248,863 | 154,145 | 2,247,654       | 148,412          | Both models are now using a neural network architecture. |
 | 16.04.2020 | 2,181,334 | 145,471 | 2,153,255       | 138,052          |                                                          |
 | 15.04.2020 | 2,086,332 | 138,475 | 2,068,918       | 131,251          | The cases were predicted using a neural network.         |
 | 14.04.2020 | 2,001,681 | 130,379 | 1,990,227       | 125,759          |                                                          |
