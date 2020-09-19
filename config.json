@@ -5,10 +5,12 @@
             "model_name": "Cases",
             "model": {
                 "type": "neural_net",
-                "alpha": 1e-5,
-                "hidden_layer_sizes": [80, 80],
-                "learning_rate": 0.001,
-                "max_iter": 50000
+                "alpha": 1e-6,
+                "hidden_layer_sizes": [50, 50],
+                "learning_rate": 0.008,
+                "max_iter": 50000,
+                "batch_size": 32,
+                "verbose": false
             },
             "datagrabber_class": "CasesDataGrabber",
             "grab_data_from_server": true,
@@ -21,9 +23,11 @@
             "model": {
                 "type": "neural_net",
                 "alpha": 1e-5,
-                "hidden_layer_sizes": [100, 100],
-                "learning_rate": 0.001,
-                "max_iter": 50000
+                "hidden_layer_sizes": [48, 48],
+                "learning_rate": 0.008,
+                "max_iter": 50000,
+                "batch_size": 32,
+                "verbose": false
             },
             "datagrabber_class": "DeathsDataGrabber",
             "grab_data_from_server": true,

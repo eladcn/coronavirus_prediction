@@ -18,7 +18,7 @@ class GraphsDataGrabber:
         req = requests.get(url, timeout=20)
         content = req.content.decode("utf-8")
 
-        data_regex = rf"(Highcharts\.chart\('{graph_id}'[\s\S]*?data:\s*)([[0-9,]*])"
+        data_regex = rf"(Highcharts\.chart\('{graph_id}'[\s\S]*?data:\s*)(\[[0-9,]*\])"
         data_matches = re.finditer(data_regex, content)
 
         for match in data_matches:
