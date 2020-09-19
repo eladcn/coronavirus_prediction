@@ -5,13 +5,14 @@
             "model_name": "Cases",
             "model": {
                 "type": "neural_net",
+                "alpha": 1e-5,
                 "hidden_layer_sizes": [80, 80],
                 "learning_rate": 0.001,
                 "max_iter": 50000
             },
             "datagrabber_class": "CasesDataGrabber",
             "grab_data_from_server": true,
-            "offline_dataset_date": "2020-05-15",
+            "offline_dataset_date": "2020-09-19",
             "days_to_predict": 10
         },
         {
@@ -19,13 +20,14 @@
             "model_name": "Deaths",
             "model": {
                 "type": "neural_net",
+                "alpha": 1e-5,
                 "hidden_layer_sizes": [100, 100],
                 "learning_rate": 0.001,
                 "max_iter": 50000
             },
             "datagrabber_class": "DeathsDataGrabber",
             "grab_data_from_server": true,
-            "offline_dataset_date": "2020-05-15",
+            "offline_dataset_date": "2020-09-19",
             "days_to_predict": 10
         },
         {

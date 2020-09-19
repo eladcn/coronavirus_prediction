@@ -32,7 +32,7 @@ def get_model(x, y, model_config):
         return regression_model
     elif model_config["model"]["type"] == "neural_net":
         neural_net_model = NeuralNetModel(model_config["model_name"])
-        neural_net_model.train(x, y, model_config["model"]["hidden_layer_sizes"], model_config["model"]["learning_rate"], model_config["model"]["max_iter"])
+        neural_net_model.train(x, y, model_config["model"]["alpha"], model_config["model"]["hidden_layer_sizes"], model_config["model"]["learning_rate"], model_config["model"]["max_iter"])
         
         return neural_net_model
     
