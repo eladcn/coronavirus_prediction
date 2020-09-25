@@ -5,6 +5,7 @@ class CasesDataGrabber(DataGrabber):
     DATASET_PREFIX = "cases"
     PATH = "worldwide-graphs"
     GRAPH_ID = "coronavirus-cases-linear"
+    SERIES_NAME = "Cases"
 
     def __init__(self):
         super()
@@ -12,7 +13,7 @@ class CasesDataGrabber(DataGrabber):
     def grab_data(self):
         graphs_grabber = GraphsDataGrabber()
 
-        data = graphs_grabber.get_data(path=CasesDataGrabber.PATH, graph_id=CasesDataGrabber.GRAPH_ID)
+        data = graphs_grabber.get_data(path=CasesDataGrabber.PATH, graph_id=CasesDataGrabber.GRAPH_ID, series_name=CasesDataGrabber.SERIES_NAME)
         filename = self.get_dataset_file_name()
 
         self.save_data_to_file(filename, data)

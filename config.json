@@ -6,7 +6,7 @@
             "model": {
                 "type": "neural_net",
                 "alpha": 1e-6,
-                "hidden_layer_sizes": [50, 50],
+                "hidden_layer_sizes": "auto",
                 "learning_rate": 0.008,
                 "max_iter": 50000,
                 "batch_size": 32,
@@ -14,12 +14,30 @@
             },
             "datagrabber_class": "CasesDataGrabber",
             "grab_data_from_server": true,
-            "offline_dataset_date": "2020-09-19",
+            "offline_dataset_date": "2020-09-25",
             "days_to_predict": 10
         },
         {
             "enabled": true,
             "model_name": "Deaths",
+            "model": {
+                "type": "neural_net",
+                "alpha": 1e-5,
+                "hidden_layer_sizes": "auto",
+                "learning_rate": 0.008,
+                "max_iter": 50000,
+                "batch_size": 32,
+                "verbose": false
+            },
+            "datagrabber_class": "DeathsDataGrabber",
+            "grab_data_from_server": true,
+            "offline_dataset_date": "2020-09-25",
+            "days_to_predict": 10
+        },
+        {
+            "_comment": "This is an example of how to use a neural network model with custom hidden layer sizes (instead of 'auto').",
+            "enabled": false,
+            "model_name": "Deaths using Neural Network with custom hidden layer sizes",
             "model": {
                 "type": "neural_net",
                 "alpha": 1e-5,
@@ -31,7 +49,7 @@
             },
             "datagrabber_class": "DeathsDataGrabber",
             "grab_data_from_server": true,
-            "offline_dataset_date": "2020-09-19",
+            "offline_dataset_date": "2020-09-25",
             "days_to_predict": 10
         },
         {

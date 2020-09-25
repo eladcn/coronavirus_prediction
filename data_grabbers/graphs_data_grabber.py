@@ -13,12 +13,12 @@ https://www.worldometers.info
 class GraphsDataGrabber:
     TARGET_DOMAIN = "https://www.worldometers.info/coronavirus/"
 
-    def get_data(self, path, graph_id):
+    def get_data(self, path, graph_id, series_name):
         url = GraphsDataGrabber.TARGET_DOMAIN + path
         req = requests.get(url, timeout=20)
         content = req.content.decode("utf-8")
 
-        data_regex = rf"(Highcharts\.chart\('{graph_id}'[\s\S]*?data:\s*)(\[[0-9,]*\])"
+        data_regex = r"(Highcharts\.chart\('" + graph_id + r"'[\s\S]*?series:\s*\[\{[\s\S]*?name:\s*?'" + series_name + r"'[\s\S]*?data:\s*?)(\[(null|[0-9,-])*?\])"
         data_matches = re.finditer(data_regex, content)
 
         for match in data_matches:
