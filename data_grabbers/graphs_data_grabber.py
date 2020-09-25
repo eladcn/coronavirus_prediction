@@ -22,7 +22,7 @@ class GraphsDataGrabber:
         data_matches = re.finditer(data_regex, content)
 
         for match in data_matches:
-            match_data = match.group(2)
+            match_data = match.group(2).replace("null", "0")
             return ast.literal_eval(match_data)
 
         return []
