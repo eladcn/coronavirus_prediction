@@ -7,14 +7,16 @@
                 "type": "neural_net",
                 "alpha": 1e-6,
                 "hidden_layer_sizes": "auto",
-                "learning_rate": 0.008,
+                "learning_rate_init": 0.0008,
                 "max_iter": 50000,
                 "batch_size": 32,
+                "tol": 1e-6,
+                "n_iter_no_change": 250,
                 "verbose": false
             },
             "datagrabber_class": "CasesDataGrabber",
             "grab_data_from_server": true,
-            "offline_dataset_date": "2020-09-25",
+            "offline_dataset_date": "2020-09-26",
             "days_to_predict": 10
         },
         {
@@ -22,16 +24,18 @@
             "model_name": "Deaths",
             "model": {
                 "type": "neural_net",
-                "alpha": 1e-5,
+                "alpha": 1e-6,
                 "hidden_layer_sizes": "auto",
-                "learning_rate": 0.008,
+                "learning_rate_init": 0.0002,
                 "max_iter": 50000,
                 "batch_size": 32,
+                "tol": 1e-6,
+                "n_iter_no_change": 250,
                 "verbose": false
             },
             "datagrabber_class": "DeathsDataGrabber",
             "grab_data_from_server": true,
-            "offline_dataset_date": "2020-09-25",
+            "offline_dataset_date": "2020-09-26",
             "days_to_predict": 10
         },
         {
@@ -39,10 +43,11 @@
             "enabled": false,
             "model_name": "Deaths using Neural Network with custom hidden layer sizes",
             "model": {
+                "_comment": "You may use any valid sklearn's MLPRegressor arguments here.",
                 "type": "neural_net",
                 "alpha": 1e-5,
                 "hidden_layer_sizes": [48, 48],
-                "learning_rate": 0.008,
+                "learning_rate_init": 0.008,
                 "max_iter": 50000,
                 "batch_size": 32,
                 "verbose": false

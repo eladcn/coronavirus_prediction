@@ -1,16 +1,24 @@
 import numpy as np
+import copy
 
 from sklearn.neural_network import MLPRegressor
 
 class NeuralNetModel:
+    KEYS_TO_REMOVE = ["_comment", "type"]
+
     def __init__(self, model_name):
         self.__model_name = model_name
         self.__model = None
 
-    def train(self, x, y, alpha=1e-5, hidden_layer_sizes=[10,], learning_rate=0.001, max_iter=2000, batch_size=32, verbose=False):
-        hidden_layer_sizes = self.calc_hidden_layer(x, hidden_layer_sizes)
+    def train(self, x, y, config):
+        config = copy.deepcopy(config)
+        config["hidden_layer_sizes"] = self.calc_hidden_layer(x, config.get("hidden_layer_sizes", "auto"))
+
+        for key in NeuralNetModel.KEYS_TO_REMOVE:
+            if key in config:
+                del config[key]
         
-        self.__model = MLPRegressor(solver="adam", activation="relu", alpha=alpha, random_state=0, hidden_layer_sizes=hidden_layer_sizes, verbose=verbose, tol=1e-5, learning_rate_init=learning_rate, max_iter=max_iter, batch_size=batch_size)
+        self.__model = MLPRegressor(**config)
         self.__model.fit(x, y)
 
     def calc_hidden_layer(self, x, hidden_layer_sizes="auto"):
